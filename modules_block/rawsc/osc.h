@@ -9,6 +9,9 @@
 
 #define NUM_OSCS 4
 
+// output buffer for each osc
+extern fract32 osc_out[NUM_OSCS][MODULE_BLOCKSIZE];
+
 // set phase directly
 extern void osc_set_phase(u16 idx, u32 val);
 
@@ -29,6 +32,6 @@ extern void osc_set_mix(u16 oscIdx, u16 outIdx, fract32 amp);
 
 // process one block and mix to buffer 
 //extern void osc_process_block(fract32* dst, u16 frameCount);
-extern void osc_process_block( u16 idx, buffer_t *outChannels);
+extern void osc_process_block( u16 idx);
 
 #endif
