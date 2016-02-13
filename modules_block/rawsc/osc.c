@@ -71,7 +71,10 @@ void osc_process_block(void) {
       
       // update phase, allowing overflow
       phase = osc_phase[osc] + osc_phi[osc];
+
+      // TODO: other shapes...
       OSC_LOOKUP(osc_out[osc][frame], phase, sine_tab, idxA, mulB);
+      
       osc_phase[osc] = phase;
       
     }

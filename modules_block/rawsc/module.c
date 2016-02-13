@@ -2,6 +2,7 @@
 
 #include "module.h"
 #include "osc.h"
+#include "mix.h"
 #include "params.h"
 
 ModuleData* gModuleData;
@@ -16,38 +17,39 @@ static inline void param_setup(u32 id, ParamValue v) {
 }
 
 void module_init(void) {
-  u16 i;
+  int param;
+  fract32 v;
 
   gModuleData = &super;
   strcpy(gModuleData->name, "rawsc");
   gModuleData->paramData = mParamData;
   gModuleData->numParams = eParamNumParams;
 
-  // detune!
-  param_setup( eParamFreqFine0, 0x00000000);
-  param_setup( eParamFreqFine1, 0x000f0000);
-  param_setup( eParamFreqFine2, 0x00ff0000);
-  param_setup( eParamFreqFine3, 0x7fff0000);
-
-  // ~220hz
-  param_setup( eParamFreqCoarse0, 0x00962fc9); 
-  param_setup( eParamFreqCoarse1, 0x00962fc9); 
-  param_setup( eParamFreqCoarse2, 0x00962fc9); 
-  param_setup( eParamFreqCoarse3, 0x00962fc9); 
-  
-  param_setup( eParamAmp0, 0x3fffffff / NUM_OSCS);
-  param_setup( eParamAmp1, 0x3fffffff / NUM_OSCS);
-  param_setup( eParamAmp2, 0x3fffffff / NUM_OSCS);
-  param_setup( eParamAmp3, 0x3fffffff / NUM_OSCS);
-
-  for(i=0; i<NUM_OSCS; i++) { 
-    osc_set_phase(i, 0);
+  param = PARAM_FREQ_FINE_0;
+  v = 0;
+  while(param <= PARAM_FREQ_FINE_3) {
+    param_setup( param++, v);
+    v += 0xf000;
   }
+
+  param = PARAM_FREQ_COARSE_0;
+  while(param <= PARAM_FREQ_COARSE_3) {
+    param_setup( param++, 0x00962fc9); // ~220hz
+  }
+
+  param = PARAM_OSC_DAC_0_0;
+  while(param <= PARAM_OSC_DAC_3_3) {  
+    param_setup( param++, 0x3fffffff / NUM_OSCS);
+  }
+
+  param = PARAM_PHASE_0;
+  while(param <= PARAM_PHASE_3) {
+    param_setup( param++, 0);
+  }
+  
 }
 
 void module_process_block(buffer_t *inChannels, buffer_t *outChannels) { 
-  u16 i, j;
-
   osc_process_block();
   mix_process_block(inChannels, outChannels);
 }
