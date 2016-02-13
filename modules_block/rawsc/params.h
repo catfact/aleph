@@ -14,6 +14,7 @@ extern void fill_param_text(char** txt);
 
 enum params {
 
+#if 0 // TODO
   eParamMix00,
   eParamMix01,
   eParamMix02,
@@ -33,12 +34,14 @@ enum params {
   eParamMix31,
   eParamMix32,
   eParamMix33,
-
+#endif
+  
   eParamFreqFine0,
   eParamFreqFine1,
   eParamFreqFine2,
   eParamFreqFine3,
-  
+
+#if 0 // TODO
   eParamPhase0,
   eParamPhase1,
   eParamPhase2,
@@ -48,6 +51,7 @@ enum params {
   eParamShape1,
   eParamShape2,
   eParamShape3,
+  #endif
   
   eParamFreqCoarse0,
   eParamFreqCoarse1,

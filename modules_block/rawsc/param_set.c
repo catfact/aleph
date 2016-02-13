@@ -3,7 +3,7 @@ void module_set_param(u32 idx, ParamValue val) {
     switch(idx) {
 
     case eParamAmp0:
-      osc_set_amp(0, val );
+      mix_set_osc_out_amp(0, val );
       break;
 
     case eParamFreqCoarse0:
@@ -15,7 +15,7 @@ void module_set_param(u32 idx, ParamValue val) {
       break;
       
     case eParamAmp1:
-      osc_set_amp(1, val );
+      mix_set_osc_out_amp(1, val );
       break;
 
     case eParamFreqCoarse1:
@@ -27,7 +27,7 @@ void module_set_param(u32 idx, ParamValue val) {
       break;
       
     case eParamAmp2:
-      osc_set_amp(2, val );
+      mix_set_osc_out_amp(2, val );
       break;
 
     case eParamFreqCoarse2:
@@ -39,7 +39,7 @@ void module_set_param(u32 idx, ParamValue val) {
       break;
 
     case eParamAmp3:
-      osc_set_amp(3, val );
+      mix_set_osc_out_amp(3, val );
       break;
 
     case eParamFreqCoarse3:

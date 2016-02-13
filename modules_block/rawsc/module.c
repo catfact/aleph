@@ -47,17 +47,9 @@ void module_init(void) {
 
 void module_process_block(buffer_t *inChannels, buffer_t *outChannels) { 
   u16 i, j;
-  
-  for(i=0; i<AUDIO_CHANNELS; i++) {
-    for(j=0; j<MODULE_BLOCKSIZE; j++) {
-      (*outChannels)[i][j] = (*inChannels)[i][j];
-    }
-  }
 
-  for(i=0; i<NUM_OSCS; i++) { 
-    osc_process_block(i);
-  }
-
+  osc_process_block();
+  mix_process_block(inChannels, outChannels);
 }
 
 #include "param_set.c"

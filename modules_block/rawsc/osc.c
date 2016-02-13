@@ -2,87 +2,78 @@
 #include <fract_typedef.h>
 
 #include "audio.h"
+
+
+#include "osc_lookup.h"
 #include "osc.h"
 
-#include "lookup.h"
-
+//---------------
+//--- const data
 const fract32 sine_tab[1024] = {
 #include "sine_table_inc.c"
 };
 
-static u32 phase[NUM_OSCS];
-static u32 phi[NUM_OSCS];
-static fract32 amp[NUM_OSCS];
+//---------------
+//--- state variables
 
 
+// FIXME: can we speed access to state vars by restructuring in memory?
+static osc_shape_t osc_shape[NUM_OSCS];
+
+__attribute__((aligned(32)))
+static u32 osc_phase[NUM_OSCS];
+
+__attribute__((aligned(32)))
+static u32 osc_phi[NUM_OSCS];
+
+__attribute__((l1_data_A))
+__attribute__((aligned(32)))
 fract32 osc_out[NUM_OSCS][MODULE_BLOCKSIZE];
 
+
+//---------------------
+//---- setters
+// set shape
+void osc_set_shape(u16 idx, u32 val) {
+  osc_shape[idx] = (osc_shape_t)val;
+}
+
+
 void osc_set_phase(u16 idx, u32 val) {
-  phase[idx] = val;
+  osc_phase[idx] = val;
 }
 
 void osc_set_phi(u16 idx, u32 val) {
-  phi[idx] = val;
+  osc_phi[idx] = val;
 }
 
 void osc_set_phi_upper(u16 idx, fract32 val) {
-  u32 phi_ = (phi[idx] & 0x0000ffff) | (val & 0x7fff0000);
-  phi[idx] = phi_;
+  u32 phi_ = (osc_phi[idx] & 0x0000ffff) | (val & 0x7fff0000);
+  osc_phi[idx] = phi_;
 }
 
 void osc_set_phi_lower(u16 idx, fract32 val) {
-  u32 phi_ = (phi[idx] & 0x7fff0000) | ((val >> 15) & 0x0000ffff);
-  phi[idx] = phi_;
+  u32 phi_ = (osc_phi[idx] & 0x7fff0000) | ((val >> 15) & 0x0000ffff);
+  osc_phi[idx] = phi_;
 }
 
-void osc_set_amp(u16 idx, fract32 val) {
-  amp[idx] = val;
-}
-
-void osc_process_block(u16 idx) { 
-  u16 frame, channel;
-  fract32 val;
-
+void osc_process_block(void) { 
+  // tmp variables
+  u16 frame;
+  u16 osc;
   u32 idxA;
-  //  u32 idxB;
-  //  fract32 mulA;
+  
   fract32 mulB;
-  //  fract32 waveA;
-  //  fract32 waveB;
+  u32 phase;
   
   for(frame=0; frame<MODULE_BLOCKSIZE; ++frame) {
-
-#if 0 // move to macro in lookup.h
-    
-    /* // phase is unsigned 32b */
-    /* // allow overflow */
-    /* phase[idx] += phi[idx]; */
-    
-    /* // lookup index */
-    /* // shift left for 10-bit index */
-    /* idxA = phase[idx] >> 22; */
-    /* idxB = (idxA + 1) & 1023; */
-
-    /* // use bottom 22 bits for interpolation */
-    /* // shift back to [0, 7fffffff] */
-    /* mulB = (fract32) ((phase[idx] & 0x3fffff) << 9); */
-    /* mulA = sub_fr1x32(0x7fffffff, mulB); */
-
-    /* // shifted for overflow */
-    /* waveA = shr_fr1x32(osc_tab[idxA], 1); */
-    /* waveB = shr_fr1x32(osc_tab[idxB], 1); */
-
-    /* // lookup, scale */
-    /* osc_out[idx] =  */
-    /*   add_fr1x32( */
-    /* 		 mult_fr1x32x32(waveA, mulA), */
-    /* 		 mult_fr1x32x32(waveB, mulB) */
-    /* 		 ) */
-    /*   ); */
-
-  #endif
-
-  OSC_LOOKUP(osc_out[idx][frame], phase[idx], sine_tab, idxA, mulB);
-  
+    for(osc=0; osc<NUM_OSCS; ++osc) {
+      
+      // update phase, allowing overflow
+      phase = osc_phase[osc] + osc_phi[osc];
+      OSC_LOOKUP(osc_out[osc][frame], phase, sine_tab, idxA, mulB);
+      osc_phase[osc] = phase;
+      
+    }
   }
 }
