@@ -130,70 +130,6 @@
     mix_set_osc_dac(3, 3, val );
   break;
 
-  case PARAM_OSC_OSC_0_0 : 
-    mix_set_osc_osc(0, 0, val );
-  break;
-
-  case PARAM_OSC_OSC_0_1 : 
-    mix_set_osc_osc(0, 1, val );
-  break;
-
-  case PARAM_OSC_OSC_0_2 : 
-    mix_set_osc_osc(0, 2, val );
-  break;
-
-  case PARAM_OSC_OSC_0_3 : 
-    mix_set_osc_osc(0, 3, val );
-  break;
-
-  case PARAM_OSC_OSC_1_0 : 
-    mix_set_osc_osc(1, 0, val );
-  break;
-
-  case PARAM_OSC_OSC_1_1 : 
-    mix_set_osc_osc(1, 1, val );
-  break;
-
-  case PARAM_OSC_OSC_1_2 : 
-    mix_set_osc_osc(1, 2, val );
-  break;
-
-  case PARAM_OSC_OSC_1_3 : 
-    mix_set_osc_osc(1, 3, val );
-  break;
-
-  case PARAM_OSC_OSC_2_0 : 
-    mix_set_osc_osc(2, 0, val );
-  break;
-
-  case PARAM_OSC_OSC_2_1 : 
-    mix_set_osc_osc(2, 1, val );
-  break;
-
-  case PARAM_OSC_OSC_2_2 : 
-    mix_set_osc_osc(2, 2, val );
-  break;
-
-  case PARAM_OSC_OSC_2_3 : 
-    mix_set_osc_osc(2, 3, val );
-  break;
-
-  case PARAM_OSC_OSC_3_0 : 
-    mix_set_osc_osc(3, 0, val );
-  break;
-
-  case PARAM_OSC_OSC_3_1 : 
-    mix_set_osc_osc(3, 1, val );
-  break;
-
-  case PARAM_OSC_OSC_3_2 : 
-    mix_set_osc_osc(3, 2, val );
-  break;
-
-  case PARAM_OSC_OSC_3_3 : 
-    mix_set_osc_osc(3, 3, val );
-  break;
-
   case PARAM_OSC_ADC_0_0 : 
     mix_set_osc_adc(0, 0, val );
   break;
@@ -258,20 +194,84 @@
     mix_set_osc_adc(3, 3, val );
   break;
 
+  case PARAM_OSC_OSC_0_0 : 
+    mix_set_osc_osc(0, 0, val );
+  break;
+
+  case PARAM_OSC_OSC_0_1 : 
+    mix_set_osc_osc(0, 1, val );
+  break;
+
+  case PARAM_OSC_OSC_0_2 : 
+    mix_set_osc_osc(0, 2, val );
+  break;
+
+  case PARAM_OSC_OSC_0_3 : 
+    mix_set_osc_osc(0, 3, val );
+  break;
+
+  case PARAM_OSC_OSC_1_0 : 
+    mix_set_osc_osc(1, 0, val );
+  break;
+
+  case PARAM_OSC_OSC_1_1 : 
+    mix_set_osc_osc(1, 1, val );
+  break;
+
+  case PARAM_OSC_OSC_1_2 : 
+    mix_set_osc_osc(1, 2, val );
+  break;
+
+  case PARAM_OSC_OSC_1_3 : 
+    mix_set_osc_osc(1, 3, val );
+  break;
+
+  case PARAM_OSC_OSC_2_0 : 
+    mix_set_osc_osc(2, 0, val );
+  break;
+
+  case PARAM_OSC_OSC_2_1 : 
+    mix_set_osc_osc(2, 1, val );
+  break;
+
+  case PARAM_OSC_OSC_2_2 : 
+    mix_set_osc_osc(2, 2, val );
+  break;
+
+  case PARAM_OSC_OSC_2_3 : 
+    mix_set_osc_osc(2, 3, val );
+  break;
+
+  case PARAM_OSC_OSC_3_0 : 
+    mix_set_osc_osc(3, 0, val );
+  break;
+
+  case PARAM_OSC_OSC_3_1 : 
+    mix_set_osc_osc(3, 1, val );
+  break;
+
+  case PARAM_OSC_OSC_3_2 : 
+    mix_set_osc_osc(3, 2, val );
+  break;
+
+  case PARAM_OSC_OSC_3_3 : 
+    mix_set_osc_osc(3, 3, val );
+  break;
+
   case PARAM_FREQ_FINE_0 : 
-    osc_set_phi_upper(0, val);
+    osc_set_phi_lower(0, val);
   break;
 
   case PARAM_FREQ_FINE_1 : 
-    osc_set_phi_upper(1, val);
+    osc_set_phi_lower(1, val);
   break;
 
   case PARAM_FREQ_FINE_2 : 
-    osc_set_phi_upper(2, val);
+    osc_set_phi_lower(2, val);
   break;
 
   case PARAM_FREQ_FINE_3 : 
-    osc_set_phi_upper(3, val);
+    osc_set_phi_lower(3, val);
   break;
 
   case PARAM_PHASE_0 : 
@@ -290,6 +290,22 @@
     osc_set_phase(3, val);
   break;
 
+  case PARAM_PHASE_INC_0 : 
+    osc_set_phase(0, val);
+  break;
+
+  case PARAM_PHASE_INC_1 : 
+    osc_set_phase(1, val);
+  break;
+
+  case PARAM_PHASE_INC_2 : 
+    osc_set_phase(2, val);
+  break;
+
+  case PARAM_PHASE_INC_3 : 
+    osc_set_phase(3, val);
+  break;
+
   case PARAM_SHAPE_0 : 
     osc_set_shape(0, val);
   break;
@@ -304,6 +320,22 @@
 
   case PARAM_SHAPE_3 : 
     osc_set_shape(3, val);
+  break;
+
+  case PARAM_OSC_AMP_0 : 
+    mix_set_osc_amp(0, val);
+  break;
+
+  case PARAM_OSC_AMP_1 : 
+    mix_set_osc_amp(1, val);
+  break;
+
+  case PARAM_OSC_AMP_2 : 
+    mix_set_osc_amp(2, val);
+  break;
+
+  case PARAM_OSC_AMP_3 : 
+    mix_set_osc_amp(3, val);
   break;
 
   case PARAM_FREQ_COARSE_0 : 

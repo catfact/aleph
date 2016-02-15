@@ -46,9 +46,11 @@ File.foreach("params.txt") { |str|
          when /ADC_DAC/ then :adc_dac
          when /OSC_DAC/ then :osc_dac
          when /PHASE/ then :phase
+         when /PHASE_INC/ then :phase_inc
          when /SHAPE/ then :shape
          when /FREQ_COARSE/ then :freq_coarse
-         when /FREQ_FINE/ then :freq_coarse
+         when /FREQ_FINE/ then :freq_fine
+         when /OSC_AMP/ then :osc_amp
          end
 
   m = str.match(/([0-3])_([0-3])/)
@@ -78,8 +80,12 @@ File.foreach("params.txt") { |str|
            "    osc_set_phi_lower("+m[1]+", val);\n"
          when :phase then
            "    osc_set_phase("+m[1]+", val);\n"
+         when :phase then
+           "    osc_set_phase_inc("+m[1]+", val);\n"
          when :shape then
            "    osc_set_shape("+m[1]+", val);\n"
+         when :osc_amp then
+           "    mix_set_osc_amp("+m[1]+", val);\n"
       end
     
     f << "  break;\n\n"
@@ -95,7 +101,7 @@ File.foreach("params.txt") { |str|
     f << "strcpy(desc[" + str + "].label, \"" + label + "\");\n"
 
     case type
-    when :adc_dac, :osc_dac, :osc_osc, :osc_adc then
+    when :adc_dac, :osc_dac, :osc_osc, :osc_adc, :osc_amp then
     
       f << "desc[" + str + "].type = eParamTypeAmp;\n"
       f << "desc[" + str + "].min = 0;\n"
@@ -103,7 +109,7 @@ File.foreach("params.txt") { |str|
       f << "desc[" + str + "].radix = 16;\n"
       f << "\n\n"
 
-    when :freq_fine, :freq_coarse, :phase then
+    when :freq_fine, :freq_coarse, :phase, :phase_inc then
       f << "desc[" + str + "].type = eParamTypeFix;\n"
       f << "desc[" + str + "].min = 0;\n"
       f << "desc[" + str + "].max = 0x7fffffff;\n"

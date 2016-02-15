@@ -228,118 +228,6 @@ desc[PARAM_OSC_DAC_3_3].max = 0x7fffffff;
 desc[PARAM_OSC_DAC_3_3].radix = 16;
 
 
-strcpy(desc[PARAM_OSC_OSC_0_0].label, "osc_osc_0_0");
-desc[PARAM_OSC_OSC_0_0].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_0_0].min = 0;
-desc[PARAM_OSC_OSC_0_0].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_0_0].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_0_1].label, "osc_osc_0_1");
-desc[PARAM_OSC_OSC_0_1].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_0_1].min = 0;
-desc[PARAM_OSC_OSC_0_1].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_0_1].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_0_2].label, "osc_osc_0_2");
-desc[PARAM_OSC_OSC_0_2].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_0_2].min = 0;
-desc[PARAM_OSC_OSC_0_2].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_0_2].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_0_3].label, "osc_osc_0_3");
-desc[PARAM_OSC_OSC_0_3].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_0_3].min = 0;
-desc[PARAM_OSC_OSC_0_3].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_0_3].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_1_0].label, "osc_osc_1_0");
-desc[PARAM_OSC_OSC_1_0].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_1_0].min = 0;
-desc[PARAM_OSC_OSC_1_0].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_1_0].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_1_1].label, "osc_osc_1_1");
-desc[PARAM_OSC_OSC_1_1].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_1_1].min = 0;
-desc[PARAM_OSC_OSC_1_1].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_1_1].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_1_2].label, "osc_osc_1_2");
-desc[PARAM_OSC_OSC_1_2].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_1_2].min = 0;
-desc[PARAM_OSC_OSC_1_2].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_1_2].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_1_3].label, "osc_osc_1_3");
-desc[PARAM_OSC_OSC_1_3].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_1_3].min = 0;
-desc[PARAM_OSC_OSC_1_3].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_1_3].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_2_0].label, "osc_osc_2_0");
-desc[PARAM_OSC_OSC_2_0].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_2_0].min = 0;
-desc[PARAM_OSC_OSC_2_0].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_2_0].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_2_1].label, "osc_osc_2_1");
-desc[PARAM_OSC_OSC_2_1].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_2_1].min = 0;
-desc[PARAM_OSC_OSC_2_1].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_2_1].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_2_2].label, "osc_osc_2_2");
-desc[PARAM_OSC_OSC_2_2].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_2_2].min = 0;
-desc[PARAM_OSC_OSC_2_2].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_2_2].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_2_3].label, "osc_osc_2_3");
-desc[PARAM_OSC_OSC_2_3].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_2_3].min = 0;
-desc[PARAM_OSC_OSC_2_3].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_2_3].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_3_0].label, "osc_osc_3_0");
-desc[PARAM_OSC_OSC_3_0].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_3_0].min = 0;
-desc[PARAM_OSC_OSC_3_0].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_3_0].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_3_1].label, "osc_osc_3_1");
-desc[PARAM_OSC_OSC_3_1].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_3_1].min = 0;
-desc[PARAM_OSC_OSC_3_1].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_3_1].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_3_2].label, "osc_osc_3_2");
-desc[PARAM_OSC_OSC_3_2].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_3_2].min = 0;
-desc[PARAM_OSC_OSC_3_2].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_3_2].radix = 16;
-
-
-strcpy(desc[PARAM_OSC_OSC_3_3].label, "osc_osc_3_3");
-desc[PARAM_OSC_OSC_3_3].type = eParamTypeAmp;
-desc[PARAM_OSC_OSC_3_3].min = 0;
-desc[PARAM_OSC_OSC_3_3].max = 0x7fffffff;
-desc[PARAM_OSC_OSC_3_3].radix = 16;
-
-
 strcpy(desc[PARAM_OSC_ADC_0_0].label, "osc_adc_0_0");
 desc[PARAM_OSC_ADC_0_0].type = eParamTypeAmp;
 desc[PARAM_OSC_ADC_0_0].min = 0;
@@ -452,6 +340,118 @@ desc[PARAM_OSC_ADC_3_3].max = 0x7fffffff;
 desc[PARAM_OSC_ADC_3_3].radix = 16;
 
 
+strcpy(desc[PARAM_OSC_OSC_0_0].label, "osc_osc_0_0");
+desc[PARAM_OSC_OSC_0_0].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_0_0].min = 0;
+desc[PARAM_OSC_OSC_0_0].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_0_0].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_0_1].label, "osc_osc_0_1");
+desc[PARAM_OSC_OSC_0_1].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_0_1].min = 0;
+desc[PARAM_OSC_OSC_0_1].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_0_1].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_0_2].label, "osc_osc_0_2");
+desc[PARAM_OSC_OSC_0_2].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_0_2].min = 0;
+desc[PARAM_OSC_OSC_0_2].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_0_2].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_0_3].label, "osc_osc_0_3");
+desc[PARAM_OSC_OSC_0_3].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_0_3].min = 0;
+desc[PARAM_OSC_OSC_0_3].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_0_3].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_1_0].label, "osc_osc_1_0");
+desc[PARAM_OSC_OSC_1_0].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_1_0].min = 0;
+desc[PARAM_OSC_OSC_1_0].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_1_0].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_1_1].label, "osc_osc_1_1");
+desc[PARAM_OSC_OSC_1_1].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_1_1].min = 0;
+desc[PARAM_OSC_OSC_1_1].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_1_1].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_1_2].label, "osc_osc_1_2");
+desc[PARAM_OSC_OSC_1_2].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_1_2].min = 0;
+desc[PARAM_OSC_OSC_1_2].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_1_2].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_1_3].label, "osc_osc_1_3");
+desc[PARAM_OSC_OSC_1_3].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_1_3].min = 0;
+desc[PARAM_OSC_OSC_1_3].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_1_3].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_2_0].label, "osc_osc_2_0");
+desc[PARAM_OSC_OSC_2_0].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_2_0].min = 0;
+desc[PARAM_OSC_OSC_2_0].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_2_0].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_2_1].label, "osc_osc_2_1");
+desc[PARAM_OSC_OSC_2_1].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_2_1].min = 0;
+desc[PARAM_OSC_OSC_2_1].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_2_1].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_2_2].label, "osc_osc_2_2");
+desc[PARAM_OSC_OSC_2_2].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_2_2].min = 0;
+desc[PARAM_OSC_OSC_2_2].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_2_2].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_2_3].label, "osc_osc_2_3");
+desc[PARAM_OSC_OSC_2_3].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_2_3].min = 0;
+desc[PARAM_OSC_OSC_2_3].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_2_3].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_3_0].label, "osc_osc_3_0");
+desc[PARAM_OSC_OSC_3_0].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_3_0].min = 0;
+desc[PARAM_OSC_OSC_3_0].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_3_0].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_3_1].label, "osc_osc_3_1");
+desc[PARAM_OSC_OSC_3_1].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_3_1].min = 0;
+desc[PARAM_OSC_OSC_3_1].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_3_1].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_3_2].label, "osc_osc_3_2");
+desc[PARAM_OSC_OSC_3_2].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_3_2].min = 0;
+desc[PARAM_OSC_OSC_3_2].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_3_2].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_OSC_3_3].label, "osc_osc_3_3");
+desc[PARAM_OSC_OSC_3_3].type = eParamTypeAmp;
+desc[PARAM_OSC_OSC_3_3].min = 0;
+desc[PARAM_OSC_OSC_3_3].max = 0x7fffffff;
+desc[PARAM_OSC_OSC_3_3].radix = 16;
+
+
 strcpy(desc[PARAM_FREQ_FINE_0].label, "freq_fine_0");
 desc[PARAM_FREQ_FINE_0].type = eParamTypeFix;
 desc[PARAM_FREQ_FINE_0].min = 0;
@@ -508,6 +508,34 @@ desc[PARAM_PHASE_3].max = 0x7fffffff;
 desc[PARAM_PHASE_3].radix = 16;
 
 
+strcpy(desc[PARAM_PHASE_INC_0].label, "phase_inc_0");
+desc[PARAM_PHASE_INC_0].type = eParamTypeFix;
+desc[PARAM_PHASE_INC_0].min = 0;
+desc[PARAM_PHASE_INC_0].max = 0x7fffffff;
+desc[PARAM_PHASE_INC_0].radix = 16;
+
+
+strcpy(desc[PARAM_PHASE_INC_1].label, "phase_inc_1");
+desc[PARAM_PHASE_INC_1].type = eParamTypeFix;
+desc[PARAM_PHASE_INC_1].min = 0;
+desc[PARAM_PHASE_INC_1].max = 0x7fffffff;
+desc[PARAM_PHASE_INC_1].radix = 16;
+
+
+strcpy(desc[PARAM_PHASE_INC_2].label, "phase_inc_2");
+desc[PARAM_PHASE_INC_2].type = eParamTypeFix;
+desc[PARAM_PHASE_INC_2].min = 0;
+desc[PARAM_PHASE_INC_2].max = 0x7fffffff;
+desc[PARAM_PHASE_INC_2].radix = 16;
+
+
+strcpy(desc[PARAM_PHASE_INC_3].label, "phase_inc_3");
+desc[PARAM_PHASE_INC_3].type = eParamTypeFix;
+desc[PARAM_PHASE_INC_3].min = 0;
+desc[PARAM_PHASE_INC_3].max = 0x7fffffff;
+desc[PARAM_PHASE_INC_3].radix = 16;
+
+
 strcpy(desc[PARAM_SHAPE_0].label, "shape_0");
 desc[PARAM_SHAPE_0].type = eParamTypeFix;
 desc[PARAM_SHAPE_0].min = 0;
@@ -534,6 +562,34 @@ desc[PARAM_SHAPE_3].type = eParamTypeFix;
 desc[PARAM_SHAPE_3].min = 0;
 desc[PARAM_SHAPE_3].max = 0x30000;
 desc[PARAM_SHAPE_3].radix = 3;
+
+
+strcpy(desc[PARAM_OSC_AMP_0].label, "osc_amp_0");
+desc[PARAM_OSC_AMP_0].type = eParamTypeAmp;
+desc[PARAM_OSC_AMP_0].min = 0;
+desc[PARAM_OSC_AMP_0].max = 0x7fffffff;
+desc[PARAM_OSC_AMP_0].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_AMP_1].label, "osc_amp_1");
+desc[PARAM_OSC_AMP_1].type = eParamTypeAmp;
+desc[PARAM_OSC_AMP_1].min = 0;
+desc[PARAM_OSC_AMP_1].max = 0x7fffffff;
+desc[PARAM_OSC_AMP_1].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_AMP_2].label, "osc_amp_2");
+desc[PARAM_OSC_AMP_2].type = eParamTypeAmp;
+desc[PARAM_OSC_AMP_2].min = 0;
+desc[PARAM_OSC_AMP_2].max = 0x7fffffff;
+desc[PARAM_OSC_AMP_2].radix = 16;
+
+
+strcpy(desc[PARAM_OSC_AMP_3].label, "osc_amp_3");
+desc[PARAM_OSC_AMP_3].type = eParamTypeAmp;
+desc[PARAM_OSC_AMP_3].min = 0;
+desc[PARAM_OSC_AMP_3].max = 0x7fffffff;
+desc[PARAM_OSC_AMP_3].radix = 16;
 
 
 strcpy(desc[PARAM_FREQ_COARSE_0].label, "freq_coarse_0");

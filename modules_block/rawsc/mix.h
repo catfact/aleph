@@ -6,6 +6,9 @@
 //! process mix matrix for audio block
 extern void mix_process_block(buffer_t *inChannels, buffer_t *outChannels);
 
+// set osc output amp, before matrix
+extern void mix_set_osc_amp(int osc, fract32 val);
+
 // set adc->dac amp
 extern void mix_set_adc_dac(int adc, int dac, fract32 val);
 
