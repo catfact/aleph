@@ -336,7 +336,7 @@
         <MODULEPATH id="juce_data_structures" path="../../../juce-grapefruit-osx/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
-    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" extraCompilerFlags="-std=c99 ">
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" extraCompilerFlags="">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
                        targetName="beekeep" defines="BEEKEEP=1" headerPath="../../../../apps/bees/src&#10;../../../../utils/avr32_sim/src&#10;../../../../utils/avr32_sim/src/usb&#10;../../../../utils/avr32_sim/src/usb/ftdi&#10;../../../../utils/avr32_sim/src/usb/midi&#10;../../../../utils/avr32_sim/src/usb/hid&#10;../../../../common/"/>
