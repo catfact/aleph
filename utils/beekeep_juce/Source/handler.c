@@ -158,7 +158,7 @@ static void handle_HidDisconnect(s32 data) {
   // nothing to do... ?
 }
 
-static void handle_HidByte(s32 data) {
+static void handle_HidPacket(s32 data) {
   // TODO: update ops
 }
 
@@ -193,7 +193,7 @@ void assign_bees_event_handlers(void) {
   app_event_handlers[ kEventMidiPacket ]	= &handle_MidiPacket ;
   app_event_handlers[ kEventHidConnect ]	= &handle_HidConnect ;
   app_event_handlers[ kEventHidDisconnect ]	= &handle_HidDisconnect ;
-  app_event_handlers[ kEventHidByte ]	= &handle_HidByte ;
+  app_event_handlers[ kEventHidPacket ]	= &handle_HidPacket ;
 }
 
 //------------------------

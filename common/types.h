@@ -42,7 +42,7 @@ typedef int32_t  fract32;
 
 #ifdef BEEKEEP
 #ifndef __cplusplus
-typedef unsigned char bool;
+ typedef unsigned char bool;
 #endif
 #endif
 

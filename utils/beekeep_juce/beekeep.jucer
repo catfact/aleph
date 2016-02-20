@@ -5,6 +5,10 @@
               jucerVersion="4.1.0">
   <MAINGROUP id="qrFqYg" name="beekeep">
     <GROUP id="{20D0B394-6D19-B446-C16A-8FE43DC7C723}" name="Source">
+      <FILE id="NwGMeA" name="ConnectorComponent.cpp" compile="1" resource="0"
+            file="Source/ConnectorComponent.cpp"/>
+      <FILE id="uZxBzr" name="ConnectorComponent.h" compile="0" resource="0"
+            file="Source/ConnectorComponent.h"/>
       <FILE id="rFSRCL" name="GfxUtil.cpp" compile="1" resource="0" file="Source/GfxUtil.cpp"/>
       <FILE id="enngrx" name="GfxUtil.h" compile="0" resource="0" file="Source/GfxUtil.h"/>
       <FILE id="OgLRI0" name="OpComponent.cpp" compile="1" resource="0" file="Source/OpComponent.cpp"/>
@@ -332,10 +336,10 @@
         <MODULEPATH id="juce_data_structures" path="../../../juce-grapefruit-osx/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
-    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" extraCompilerFlags="-std=c99 ">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
-                       targetName="beekeep" defines="-D BEEKEEP=1"/>
+                       targetName="beekeep" defines="BEEKEEP=1" headerPath="../../../../apps/bees/src&#10;../../../../utils/avr32_sim/src&#10;../../../../utils/avr32_sim/src/usb&#10;../../../../utils/avr32_sim/src/usb/ftdi&#10;../../../../utils/avr32_sim/src/usb/midi&#10;../../../../utils/avr32_sim/src/usb/hid&#10;../../../../common/"/>
         <CONFIGURATION name="Release" libraryPath="/usr/X11R6/lib/" isDebug="0" optimisation="3"
                        targetName="beekeep" defines="-D BEEKEEP=1"/>
       </CONFIGURATIONS>

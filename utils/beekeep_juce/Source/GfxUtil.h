@@ -14,7 +14,6 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-
 class GfxUtil {
 public:
     
