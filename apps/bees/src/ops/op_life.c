@@ -236,11 +236,12 @@ static void op_life_handler(op_monome_t* op_monome, u32 edata) {
 
 
 static void op_life_output(op_life_t* life) {
+  u16 i;
   net_activate(life->outs[0], lifenow[life->x + (life->y << 4)], life);
 
   life->lpop = life->pop;
   life->pop = 0;
-  for(u16 i=0;i<256;i++) life->pop += lifenow[i];
+  for(i=0;i<256;i++) life->pop += lifenow[i];
   net_activate(life->outs[1], life->pop, life);
   net_activate(life->outs[2], (life->pop - life->lpop), life);
 }
