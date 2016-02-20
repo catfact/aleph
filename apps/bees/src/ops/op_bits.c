@@ -90,12 +90,13 @@ void op_bits_init(void* mem) {
 //---- static func define
 
 static void op_bits_in_index(op_bits_t* bits, const io_t val) {
+  u8 i;
   bits->index = val;
   if(bits->index<0) bits->index = 0;
   if(bits->index>255) bits->index = 255;
   
 
-  for(u8 i=0;i<8;i++) {
+  for(i=0;i<8;i++) {
       net_activate(bits->outs[i+1], !!(bits->index & (1<<i)), bits);    // !! turns num into 0 or 1
   }
 }
