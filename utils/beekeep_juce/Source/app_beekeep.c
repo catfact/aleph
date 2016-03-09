@@ -44,7 +44,7 @@
 
 // maj = 1byte, min = 1byte, rev = 2byte
 //const u32 beesVersion = (MAJ << 24) | (MIN << 16) | (REV << 8);
-AppVersion beesVersion = { .min = MIN , .maj = MAJ , .rev = REV };
+const AppVersion beesVersion = { .min = MIN , .maj = MAJ , .rev = REV };
 
 //--------------------------------
 //--- static vars
