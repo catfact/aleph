@@ -70,10 +70,12 @@ File.foreach("params.txt") { |str|
            "    mix_set_adc_dac("+m[1]+", "+m[2]+", val );\n"
          when :osc_dac then
            "    mix_set_osc_dac("+m[1]+", "+m[2]+", val );\n"
-         when :osc_adc then
-           "    mix_set_osc_adc("+m[1]+", "+m[2]+", val );\n"
-         when :osc_osc then
-           "    mix_set_osc_osc("+m[1]+", "+m[2]+", val );\n"
+
+           # FIXME
+#         when :osc_adc then
+#           "    mix_set_osc_adc("+m[1]+", "+m[2]+", val );\n"
+#         when :osc_osc then
+#           "    mix_set_osc_osc("+m[1]+", "+m[2]+", val );\n"
          when :freq_coarse then
            "    osc_set_phi_upper("+m[1]+", val);\n"
          when :freq_fine then

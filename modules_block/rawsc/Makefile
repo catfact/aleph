@@ -11,7 +11,11 @@ version = $(maj).$(min).$(rev)
 ldr_name = $(module_name)-$(version).ldr
 
 # add sources from here/audio library.
-module_obj = osc.o module.o mix.o
+module_obj = osc.o \
+	mix.o \
+	mod.o \
+	rawsc.o \
+	$(audio)/interpolate.o
 
 # -----  below here, probably dont need to customize.
 

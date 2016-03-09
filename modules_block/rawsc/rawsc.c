@@ -3,6 +3,7 @@
 #include "module.h"
 #include "osc.h"
 #include "mix.h"
+#include "mod.h"
 #include "params.h"
 
 ModuleData* gModuleData;
@@ -46,11 +47,14 @@ void module_init(void) {
   while(param <= PARAM_PHASE_3) {
     param_setup( param++, 0);
   }
+
+  mod_init();
   
 }
 
 void module_process_block(buffer_t *inChannels, buffer_t *outChannels) { 
   osc_process_block();
+  mod_process_block();
   mix_process_block(inChannels, outChannels);
 }
 
