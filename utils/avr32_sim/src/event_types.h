@@ -58,12 +58,13 @@ typedef enum {
 
   // a sneaky little event type for app cutsomization
   kEventAppCustom,
+
   //// better?
   // kEventAppTimer
   // kEventApp...
   // kEventApp...,
   // ??
-  
+  kEventAppCustom,
   /// dummy/count
   kNumEventTypes,
 } etype;
