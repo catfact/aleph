@@ -423,7 +423,8 @@ void module_process_frame(void) {
     if( !filter_1p_sync(&(svfRqSlew[i])) ) {
       filter_svf_set_rq( &(svf[i]), filter_1p_lo_next(&(svfRqSlew[i])) );
     }
-    tmpSvf = filter_svf_next( &(svf[i]), tmpDel);  
+	//    tmpSvf = filter_svf_next( &(svf[i]), tmpDel);
+	tmpSvf = filter_svf_softclip_next( &(svf[i]), tmpDel);  
     // mix
     tmpDel = mult_fr1x32x32( tmpDel, mix_fdry[i] );
     tmpDel = add_fr1x32(tmpDel, mult_fr1x32x32(tmpSvf, mix_fwet[i]) );

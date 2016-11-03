@@ -156,6 +156,18 @@ extern fract32 filter_svf_next( filter_svf* f, fract32 in) {
   return out;
 }
 
+
+// get next value with softclip, mixing all nodes
+extern fract32 filter_svf_softclip_next( filter_svf* f, fract32 in) {
+  // process 2x and average
+  filter_svf_calc_frame(f, in);
+  fract32 out = shr_fr1x32(filter_svf_mix_outputs(f), 1);
+  filter_svf_softclip_calc_frame(f, in);
+  out = add_fr1x32(out, shr_fr1x32(filter_svf_mix_outputs(f), 1));
+  return out;
+}
+
+
 extern fract32 filter_svf_lpf_next( filter_svf* f, fract32 in) {
   filter_svf_calc_frame(f, in);
   return f->low;
