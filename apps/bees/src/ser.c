@@ -18,6 +18,8 @@
 #include "param.h"
 #include "scene.h"
 
+#include "bees_serial_events.h"
+
 // Using serial framing as described in the following link:
 // http://eli.thegreenplace.net/2009/08/12/framing-in-serial-communications/
 #define START_FLAG 0x12
@@ -61,47 +63,6 @@ void serial_puts(const char *str) {
   }
 }
 
-
-enum serialMsgTypes {
-  eSerialMsg_debug,
-  eSerialMsg_dumpIns,
-  eSerialMsg_insDump,
-  eSerialMsg_dumpParams,
-  eSerialMsg_paramsDump,
-  eSerialMsg_triggerParam,
-  eSerialMsg_triggerIn,
-  eSerialMsg_queryIn,
-  eSerialMsg_inVal,
-  eSerialMsg_queryParam,
-  eSerialMsg_paramVal,
-  eSerialMsg_outVal,
-
-  //messages for patching bees
-  eSerialMsg_dumpOutputs,
-  eSerialMsg_outputsDump,
-  eSerialMsg_dumpConnections,
-  eSerialMsg_connectionsDump,
-  eSerialMsg_connect,
-  eSerialMsg_disconnect,
-  eSerialMsg_dumpOps,
-  eSerialMsg_opsDump,
-  eSerialMsg_dumpOpDescriptions,
-  eSerialMsg_opDescriptionsDump,
-  eSerialMsg_newOp,
-  eSerialMsg_deleteOp,
-
-  //Messages for preset store/recall
-  eSerialMsg_storePreset,
-  eSerialMsg_recallPreset,
-
-  //Messages for serial bfin prog
-  eSerialMsg_bfinProgStart,
-  eSerialMsg_bfinHexChunk,
-  eSerialMsg_bfinDscChunk,
-  eSerialMsg_bfinProgEnd,
-  eSerialMsg_bfinProgEcho,
-  eSerialMsg_numParams
-};
 
 void serial_debug(const char *str) {
   serial_startTx ();
