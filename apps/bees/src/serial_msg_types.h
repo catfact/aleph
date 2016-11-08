@@ -1,7 +1,7 @@
-#ifndef _BEES_SERIAL_EVENTS_H_
-#define _BEES_SERIAL_EVENTS_H_
+#ifndef _BEES_SERIAL_MSG_H_
+#define _BEES_SERIAL_MSG_H_
 
-enum serialMsgTypes {
+typedef enum serialMsgTypes {
   eSerialMsg_debug,
   eSerialMsg_dumpIns,
   eSerialMsg_insDump,
@@ -40,6 +40,6 @@ enum serialMsgTypes {
   eSerialMsg_bfinProgEnd,
   eSerialMsg_bfinProgEcho,
   eSerialMsg_numParams
-};
+} serial_msg_t;
 
 #endif

@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include "../../apps/bees/src/bees_serial_events.h"
+#include "../../apps/bees/src/serial_msg_types.h"
 
 #define START_FLAG 0x12
 #define END_FLAG 0x13

@@ -18,10 +18,11 @@
 #include "param.h"
 #include "scene.h"
 
-#include "bees_serial_events.h"
+#include "serial_msg_types.h"
 
 // Using serial framing as described in the following link:
 // http://eli.thegreenplace.net/2009/08/12/framing-in-serial-communications/
+// FIXME: these should go in a header maybe?
 #define START_FLAG 0x12
 #define END_FLAG 0x13
 #define DLE 0x7D
