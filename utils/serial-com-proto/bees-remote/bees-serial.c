@@ -34,7 +34,7 @@ typedef struct bees_val {
 // this will of course break for val > 0x7fff
 bees_val_t unpackSigned(int val) {
   bees_val_t ret = {
-	.hi = val & 0xff00 >> 8,
+	.hi = (val & 0xff00) >> 8,
 	.lo = val & 0xff
   };
   if(val > 0) { ret.hi &= 0x7fff; }
@@ -44,7 +44,7 @@ bees_val_t unpackSigned(int val) {
 
 bees_val_t unpackUnsigned(unsigned int val) {
   bees_val_t ret = {
-	.hi = val & 0xff00 >> 8,
+	.hi = (val & 0xff00) >> 8,
 	.lo = val & 0xff
   };
   return ret;
@@ -105,12 +105,12 @@ const int bees_serial_tx_nb(void) {
 // process a single byte
 static void process_rx_byte(u8 b) {
   if (rx_write(b)) {
+	
   } else {
-	printf("rx buffer is full! \r\n");
+	// buffer is full
   }
   if(b == DLE) {
-	// reset rx buf
-	rx_nb = 0;
+	
   }
 
   if(b == END_FLAG) {

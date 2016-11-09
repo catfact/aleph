@@ -28,7 +28,7 @@ int port_init(char* device) {
   printf("port_init(%s) \r\n", device);
   memset (&tty, 0, sizeof tty);
   
-  ser_fd = open(device, O_RDWR | O_NOCTTY);
+  ser_fd = open(device, O_RDWR /*| O_NOCTTY*/ | O_NONBLOCK);
 
   if ( tcgetattr ( ser_fd, &tty ) != 0 ) {
 	fprintf(stderr, "error getting tty attributes \r\n");
@@ -60,11 +60,11 @@ void port_write(const u8* data, int nb) {
 
 int port_read_byte(void) {
   ret = read(ser_fd, &rx, 1);
-  if(ret > 0) {
-	return rx & 0xff;
-  } else {
-	return -1;
-  }
+  if(ret > 0) { 
+	return rx & 0xff; 
+  } else { 
+  	return -1; 
+  } 
 }
 
 // FIXME

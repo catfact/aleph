@@ -1,12 +1,27 @@
 #include <stdio.h>
-#include <ctype.h>
+#include <ctype.h>  
 #include <string.h>  
 #include <curses.h>
 #include <pthread.h>
-#include <unistd.h>  
+#include <unistd.h>
+#include <errno.h>  
 
 #include "bees-serial.h"
 #include "port.h"
+
+// quit flag
+int quit = 0;
+
+// window for user input
+static WINDOW* win_input;
+// window for text from device
+static WINDOW* win_display;
+
+void show_input(const char* str) {
+  mvwprintw(win_input, 0, 0, str);
+  wclrtoeol(win_input);
+  wrefresh(win_input);
+}
 
 // loop for grabbing UI input
 void* ui_tx_loop(void* arg) {
@@ -15,8 +30,6 @@ void* ui_tx_loop(void* arg) {
   int rx_nb;
   const u8* rx_buf;
   char str[256];
-  int quit = 0;
-  
   while(1) {
 	if(quit) { break; }
 
@@ -30,23 +43,23 @@ void* ui_tx_loop(void* arg) {
 	  quit = 1;
 	  break;
 	case 116: // t
-	  mvprintw(0, 0, "param_trigger (0, 1)"); clrtoeol();
+	  show_input("param_trigger (0, 1)");
 	  bees_serial_param_trigger(0, 1);
 	  tx = 1;
 	  break;
 	case 111: // o
-	  mvprintw(0, 0, "dump_ops"); clrtoeol();
+	  show_input("dump_ops");
 	  bees_serial_dump_ops();
 	  tx = 1;
 	  break;	  
 	case 112: // p
-	  mvprintw(0, 0, "param_query (1)"); clrtoeol();
-	  bees_serial_param_query(1);
+	  show_input("param_query (0)");
+	  bees_serial_param_query(0);
 	  tx = 1;
 	  break;
 	case 105: // i
-	  mvprintw(0, 0, "in_query (1)"); clrtoeol();
-	  bees_serial_in_query(1);
+	  show_input("in_query (0)");
+	  bees_serial_in_query(0);
 	  tx = 1;
 	  break;
 	default:
@@ -67,11 +80,21 @@ void* rx_loop(void* arg) {
   char str[32];
   while(1) {
 	// doesn't work... 
-	// if(quit) { break; }
+	if(quit) { break; }
 	rx = port_read_byte();
 	if(rx > 0) {
+	  // TODO: pass this along to the bees serial format parser
+	  #if 0
 	  ch = (char)rx;
-	  if(isprint(ch)) { addch(ch); }
+	  if(isprint(ch)) {
+		waddch(win_display, ch);
+		//		wrefresh(win_display);
+	  }
+	  #else
+	  sprintf(str, "%2.2x ", rx);
+	  waddstr(win_display, str);
+	  wrefresh(win_display);
+	  #endif
 	}
   }
   // never gets here
@@ -91,18 +114,20 @@ int main (int argc, char** argv) {
   // init ncurses
   initscr();
   clear();
+  cbreak();
   noecho();
-  cbreak();  
+  timeout(0);
 
+  win_input = newwin(4, COLS, 0, 0);
+  
+  win_display = newwin(LINES-5, COLS, 5, 0);
+  scrollok(win_display, TRUE);
+  
   pthread_create(&ui_tx_thread, NULL, ui_tx_loop, NULL);
   pthread_create(&rx_thread, NULL, rx_loop, NULL);
 
   pthread_join(ui_tx_thread, NULL);
-  
-  // FIXME: would be nice to do a clean exit
-  // but rx_thread still blocks on read()...
-  //  pthread_join(rx_thread, NULL);
-  pthread_cancel(rx_thread);
+  pthread_join(rx_thread, NULL);
 
   printf("cleaning up... \r\n");
   port_cleanup();
