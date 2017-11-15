@@ -6,8 +6,8 @@
 
 //-------------------------------------------------
 //----- descriptor
-static const char* op_tog_instring = "STATE\0  MUL\0    ";
-static const char* op_tog_outstring = "VAL\0    ";
+static const char* op_tog_instring =  "BANG\0   MUL\0    ";
+static const char* op_tog_outstring = "A\0      B\0      ";
 static const char* op_tog_opstring = "TOG";
 
 //-------------------------------------------------
@@ -40,8 +40,9 @@ void op_tog_init(void* op) {
   
   // superclass state
   tog->super.numInputs = 2;
-  tog->super.numOutputs = 1;
+  tog->super.numOutputs = 2;
   tog->outs[0] = -1;
+  tog->outs[1] = -1;
  
   tog->super.in_val = tog->in_val;
   tog->in_val[0] = &(tog->state);
@@ -72,6 +73,7 @@ static void op_tog_in_state(op_tog_t* tog, const io_t v) {
       tog->state = 0;
     }
     net_activate(tog, 0, tog->state);
+	net_activate(tog, 1, tog->state == 0  ? tog->mul : 0);
   }
 }
 
@@ -81,6 +83,7 @@ static void op_tog_in_mul(op_tog_t* tog, const io_t v) {
   if (tog->state > 0) {
     tog->state = (v);
     net_activate(tog, 0, tog->state);
+	net_activate(tog, 1, tog->state == 0  ? tog->mul : 0);
   }
 }
 

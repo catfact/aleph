@@ -238,11 +238,7 @@ static void op_ww_in_focus(op_ww_t* op, const io_t v) {
   op->x.key_count = 0;
   op->x.SIZE = monome_size_x();
   op->x.LENGTH = op->x.SIZE - 1;
-  // print_dbg("\r monome size: ");
-  // print_dbg_ulong(op->x.SIZE);
   op->x.VARI = monome_is_vari();
-  // print_dbg("\r monome vari: ");
-  // print_dbg_ulong(op->x.VARI);
 
   if(op->x.VARI) op->x.re = &ww_refresh;
   else op->x.re = &ww_refresh_mono;

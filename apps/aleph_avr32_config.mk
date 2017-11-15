@@ -36,7 +36,9 @@ LINKER_SCRIPT = $(APP_DIR)/aleph-$(APP).lds
 DBGFLAGS =
 
 # optimization level
-OPTIMIZATION = -O3
+# OPTIMIZATION = -O3
+include $(ALEPH_AVR32)/optimization.mk
+
 
 # release/debug build
 ifdef R

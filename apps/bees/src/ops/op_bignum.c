@@ -25,9 +25,6 @@ static const char* op_bignum_opstring = "BIGNUM";
 //-- temp
 // string buffer for number->text rendering
 static char tmpStr[16];
-// try sharing region data among instances...
-//static volatile u8 regData[OP_BIGNUM_GFX_BYTES];
-//// ^^^ fuck. i think that is broken. try moving to class structure and allocating from op poll?
 
 //-------------------------------------------------
 //----- static function declaration

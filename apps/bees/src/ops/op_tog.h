@@ -14,7 +14,7 @@ typedef struct op_tog_struct {
   volatile io_t mul;
   // pointers for external access
   volatile io_t* in_val[2];
-  op_out_t outs[1];
+  op_out_t outs[2];
 } op_tog_t;
 
 extern void op_tog_init(void* tog);
