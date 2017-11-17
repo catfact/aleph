@@ -142,8 +142,7 @@ void module_set_param(u32 idx, ParamValue v) {
   case eParam_cvVal3 :
 	cvVal[3] = v;
     break;
-#else
-	
+#else	
   case eParam_cvVal0 :
     filter_1p_lo_in(&(cvSlew[0]), v);
     break;
