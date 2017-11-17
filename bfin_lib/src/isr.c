@@ -65,15 +65,23 @@ void sport0_rx_isr() {
   /* iTxBuf[3] = iRxBuf[3]; */
 
   READY_HI;
+  
   /// if this interrupt came from DMA1, clear it and continue(W1C)
   if(*pDMA1_IRQ_STATUS & 1) { *pDMA1_IRQ_STATUS = 0x0001; }
+  
 
 }
 
 // ISR on sport1 tx completion
 void sport1_tx_isr() {
-  // clear the interrupt flag, leave enabled
+  // clear the interrupt flag
   *pDMA4_IRQ_STATUS = 0x0001;
+  
+  // disable sport1 tx?  ok
+  //  *pSPORT1_TCR1  &= ~TSPEN;
+  
+  // show me a thing
+  //  LED3_LO;
 }
 
 

@@ -58,12 +58,13 @@ int main(void) {
   // initialize the codec
   init_1939();
 
-  // leds on
+  // leds off
   LED3_HI;
   LED4_HI;
 
   // signal the ready flag
   READY_HI;
+
   
   while(1) {
     // fixme: everything happens in ISRs!

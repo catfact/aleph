@@ -27,6 +27,8 @@
 /// custom
 #include "params.h"
 
+#define TEST_BYPASS_SLEW 1
+
 // data structure of external memory
 typedef struct _dacsData {
   ModuleData super;
@@ -100,26 +102,60 @@ u32 module_get_num_params(void) {
    - last thing audio ISR does is call the first DAC channel to be loaded
    - dac_update writes to 4x16 volatile buffer
 */
+static fract32 sawVal[4] = { 0, 0, 0, 0 };
 
 void module_process_frame(void) {
 
-  // Update one of the CV outputs
+#if TEST_BYPASS_SLEW
+  // try skipping CV update altogether on alternate frames...
+  //  static u8 skipCvFrame = 0;
+
+  //  update_saw(2);
+  
+  //cv_update(cvChan, cvVal[cvChan]);
+  cv_update(cvChan, (fract32)sawVal[cvChan]);
+  sawVal[cvChan] += ((0xffffffff / 480000) * (cvChan + 11));
+  
+  if(++cvChan == 4) {
+	  cvChan = 0;
+  }
+  
+  //  if(++skipCvFrame == 4) { skipCvFrame = 0; }
+  
+  //  }
+#else
+  // Update one of the CV outputs with slew
   if(filter_1p_sync(&(cvSlew[cvChan]))) { ;; } else {
     cvVal[cvChan] = filter_1p_lo_next(&(cvSlew[cvChan]));
     cv_update(cvChan, cvVal[cvChan]);
   }
-
-  // Queue up the next CV output for processing next audio frame
   if(++cvChan == 4) {
-    cvChan = 0;
+	cvChan = 0;
   }
+#endif
+
+
 }
 
 // parameter set function
 void module_set_param(u32 idx, ParamValue v) {
-  LED4_TOGGLE; // which one it this?
   switch(idx) {
 
+#if TEST_BYPASS_SLEW
+  case eParam_cvVal0 :
+	cvVal[0] = v;
+    break;
+  case eParam_cvVal1 :
+	cvVal[1] = v;
+    break;
+  case eParam_cvVal2 :
+	cvVal[2] = v;
+    break;
+  case eParam_cvVal3 :
+	cvVal[3] = v;
+    break;
+	#else
+	
   case eParam_cvVal0 :
     filter_1p_lo_in(&(cvSlew[0]), v);
     break;
@@ -132,6 +168,7 @@ void module_set_param(u32 idx, ParamValue v) {
   case eParam_cvVal3 :
     filter_1p_lo_in(&(cvSlew[3]), v);
     break;
+	#endif
 
   case eParam_cvSlew0 :
     filter_1p_lo_set_slew(&(cvSlew[0]), v);
