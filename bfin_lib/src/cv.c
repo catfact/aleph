@@ -13,7 +13,6 @@
 //====================
 //=== global variables , initialized here
 volatile u32 cvTxBuf = 0x00000000;
-volatile u8 cvNeedsUpdate = 0;
 
 //=============================
 // extern functions
@@ -43,18 +42,14 @@ void cv_update(u8 ch, fract32 val) {
   
   buf = 0;
   buf |= (CV_DAC_COM_WRITE << CV_DAC_COM_LSHIFT);
-
-  buf = 0x300000;
+  
   buf |= ((1 << ch) << CV_DAC_ADDR_LSHIFT);
 	
   // shift from fract32 (positive)
   buf |= (val >> 15 ) & 0xffff;
   
-  cvTxBuf = buf;	
-  cvNeedsUpdate = 1;
-  
-  // enable SPORT1 TX
-  // this should raise an interrupt
-  *pSPORT1_TCR1 |= TSPEN;
+  cvTxBuf = buf;
 
+  *pDMA4_CONFIG	= (*pDMA4_CONFIG | DMAEN);
+  
 }

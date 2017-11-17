@@ -173,11 +173,11 @@ void init_DMA(void) {
   // Inner loop address increment
   *pDMA2_X_MODIFY = 4;
 
-#if 0
   /// map dma4 to sport1 tx
   *pDMA4_PERIPHERAL_MAP = 0x4000;
   // 32-bit transfers, autobuffer, no interrupt
-  *pDMA4_CONFIG = WDSIZE_32 | FLOW_1;
+  //  *pDMA4_CONFIG = WDSIZE_32 | FLOW_1;
+  *pDMA4_CONFIG = WDSIZE_32; // no flow!
   //*pDMA4_CONFIG = WDSIZE_32 | FLOW_1 | DI_EN;
   // Start address of data buffer
   *pDMA4_START_ADDR = (void *)(&cvTxBuf);
@@ -186,8 +186,6 @@ void init_DMA(void) {
   *pDMA4_X_COUNT = 1;
   // inner loop address increment
   *pDMA4_X_MODIFY = 4;
-#endif
-
 }
 
 // enable sport0 DMA
@@ -203,12 +201,10 @@ void enable_DMA_sport0(void) {
 
 // begin transfers with sport1 and dma4
 void enable_DMA_sport1(void) {
-  #if 0
   // enable DMA4
   *pDMA4_CONFIG	= (*pDMA4_CONFIG | DMAEN);
   // enable sport1 tx
   *pSPORT1_TCR1 	= (*pSPORT1_TCR1 | TSPEN);
-  #endif
 }
 
 
@@ -229,7 +225,7 @@ void init_flags(void) {
 void init_interrupts(void) {
   int i=0;
 
-#if 0 // original
+#if 1 // original
  
   // by default:
   // sport0 rx (dma1) -> ID2 = IVG9

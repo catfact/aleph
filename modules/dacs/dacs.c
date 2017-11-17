@@ -107,22 +107,12 @@ static fract32 sawVal[4] = { 0, 0, 0, 0 };
 void module_process_frame(void) {
 
 #if TEST_BYPASS_SLEW
-  // try skipping CV update altogether on alternate frames...
-  //  static u8 skipCvFrame = 0;
-
-  //  update_saw(2);
-  
-  //cv_update(cvChan, cvVal[cvChan]);
   cv_update(cvChan, (fract32)sawVal[cvChan]);
-  sawVal[cvChan] += ((0xffffffff / 480000) * (cvChan + 11));
+  sawVal[cvChan] += ((0xffffffff / 480000) * (cvChan + 12));
   
   if(++cvChan == 4) {
 	  cvChan = 0;
   }
-  
-  //  if(++skipCvFrame == 4) { skipCvFrame = 0; }
-  
-  //  }
 #else
   // Update one of the CV outputs with slew
   if(filter_1p_sync(&(cvSlew[cvChan]))) { ;; } else {
@@ -133,8 +123,6 @@ void module_process_frame(void) {
 	cvChan = 0;
   }
 #endif
-
-
 }
 
 // parameter set function
@@ -154,7 +142,7 @@ void module_set_param(u32 idx, ParamValue v) {
   case eParam_cvVal3 :
 	cvVal[3] = v;
     break;
-	#else
+#else
 	
   case eParam_cvVal0 :
     filter_1p_lo_in(&(cvSlew[0]), v);
@@ -168,7 +156,7 @@ void module_set_param(u32 idx, ParamValue v) {
   case eParam_cvVal3 :
     filter_1p_lo_in(&(cvSlew[3]), v);
     break;
-	#endif
+#endif
 
   case eParam_cvSlew0 :
     filter_1p_lo_set_slew(&(cvSlew[0]), v);
