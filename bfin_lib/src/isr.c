@@ -72,16 +72,36 @@ void sport0_rx_isr() {
 }
 
 // ISR on sport1 tx completion
+static int sport1_tx_isr_count = 0;
 void sport1_tx_isr() {
-  // clear the interrupt flag?
-  *pDMA4_IRQ_STATUS = 0x0001;
 
-  
-  // disable sport1 tx?  ok
-  //  *pSPORT1_TCR1  &= ~TSPEN;
-  
-  // show me a thing
-  LED3_TOGGLE;
+  if(cvNeedsUpdate) {
+	if(++sport1_tx_isr_count == 6000) {
+	  sport1_tx_isr_count = 0;
+	  LED3_TOGGLE; // <-- this works
+	}	
+	// fill the tx FIFO
+	/// secondary data
+	*pSPORT1_TX32 = cvTxBuf;
+	// primary data (dummy)
+	*pSPORT1_TX32 = cvTxBuf;
+	///// hmm... 
+	/// secondary data
+	*pSPORT1_TX32 = cvTxBuf;
+	// primary data (dummy)
+	*pSPORT1_TX32 = cvTxBuf;
+
+	
+	//	*pSPORT1_TX32 = 0x00000000;  
+	cvNeedsUpdate = 0;
+  } else {
+	// nothing to do
+	// disable tx
+	*pSPORT1_TCR1  &= ~TSPEN; // <--- same behavior if we don't do this
+  }
+	
+  // clear the interrupt flag? doesn't do anything without DMA4 enabled
+  // *pDMA4_IRQ_STATUS = 0x0001;  
 }
 
 

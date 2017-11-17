@@ -13,6 +13,7 @@
 //====================
 //=== global variables , initialized here
 volatile u32 cvTxBuf = 0x00000000;
+volatile u8 cvNeedsUpdate = 0;
 
 //=============================
 // extern functions
@@ -36,11 +37,9 @@ void cv_update(u8 ch, fract32 val) {
   u32 buf;
 
   if(++cv_update_count == 10000) { 
-
 	LED4_TOGGLE;
 	cv_update_count = 0;
   }
-
   
   buf = 0;
   buf |= (CV_DAC_COM_WRITE << CV_DAC_COM_LSHIFT);
@@ -51,27 +50,11 @@ void cv_update(u8 ch, fract32 val) {
   // shift from fract32 (positive)
   buf |= (val >> 15 ) & 0xffff;
   
-  // extra bit for weird FS timing kludge (need 25 clocks)
-  //  cvTxBuf = buf << 1;
-  cvTxBuf = buf;
+  cvTxBuf = buf;	
   cvNeedsUpdate = 1;
-    // enable SPORT1 TX
+  
+  // enable SPORT1 TX
+  // this should raise an interrupt
   *pSPORT1_TCR1 |= TSPEN;
 
-  #if 1
-  /// ok. try writing directly to SPORT1 FIFO and registers, no DMA
-
-  // disable tx
-  *pSPORT1_TCR1 &= ~TSPEN;
-  
-  // fill the FIFO (secondary data side)
-  /// secondary data
-  *pSPORT1_TX32 = buf;
-  // primary data (dummy)
-  *pSPORT1_TX32 = 0x00000000;
-  
-  // enable TX
-  *pSPORT1_TCR1 |= TSPEN;
-
- #endif 
 }

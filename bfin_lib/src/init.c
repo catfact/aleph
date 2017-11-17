@@ -106,37 +106,40 @@ void init_sport0(void)
 
 // CONFIGURE sport1  [ drive 1x AD5686 from DTSEC ]
 void init_sport1(void) {
+  
   //----- note: edge selection is for *driving* the pins, sampled opposite
-  // TFS/clk driven w/ rising  edge : TCKFE  = 0
-  // late frame sync              : LATFS  = 1
-  // TFS active low               : LTFS   = 1
-  // data-dependent TFS            : DITFS  = 0
-  // internal clock                : ITCLK  = 1
-  // internal TFS                  : ITFS   = 1
-  // frame sync required           : TFSR  = 1
-  // no companding                 : TDTYPE = 00
-  // MSB first                     : TLSBIT = 0  
+  // TFS/clk driven w/ rising  edge : TCKFE
+  // late frame sync              : LATFS  
+  // TFS active low               : LTFS   
+  // data-dependent TFS            : DITFS
+  // internal clock                : ITCLK
+  // internal TFS                  : ITFS 
+  // frame sync required           : TFSR
+  // no companding                 : TDTYPE xx
+  // MSB first                     : TLSBIT
 
-  //  *pSPORT1_TCR1 =  TCKFE | ITCLK | ITFS | TFSR | LTFS | LATFS; 
+  // really seems like this should be correct...
   *pSPORT1_TCR1 =  ITCLK | ITFS | TFSR | LTFS | LATFS;
   
-  //*pSPORT1_TCR1 =  ITCLK | ITFS | TFSR;
- 
-  //// normal mode, not stereo             : TSFSE = 0
-  //// secondary side enabled : TXSE  = 1
+  // also tried this...
+  //  *pSPORT1_TCR1 =  TCKFE | ITCLK | ITFS | TFSR | LTFS | LATFS;
+  
+  // but this totally wrong thing is the only one that produces results
+  // *pSPORT1_TCR1 =  ITCLK | ITFS | TFSR;
+  
+  //// normal mode, not stereo : TSFSE = 0
+  //// secondary data enabled  : TXSE  = 1
   ///// 24-bit word length
   *pSPORT1_TCR2 = 23 | TXSE ;
-
-  //// 25-bit cause DACs need an extra cycle to recover, ugggh
-  //*pSPORT1_TCR2 = 24 | TXSE ;
+  
+  //// 25-bit for some damn reason
+  // *pSPORT1_TCR2 = 24 | TXSE ;
   
   // tclk = sclk / ( 2 x (div + 1)
   // we want < 25Mhz
   // sclk = 108M, so:
   // *pSPORT1_TCLKDIV = 1; // = 27 Mhz
-   *pSPORT1_TCLKDIV = 2; // = 13.5 Mhz.. not ideal but o k
-  //*pSPORT1_TCLKDIV = 3; // = 6.75 Mhz... boo
-
+   *pSPORT1_TCLKDIV = 2; // = 18 Mhz.. not ideal but o k
 }
 
 
@@ -170,11 +173,10 @@ void init_DMA(void) {
   // Inner loop address increment
   *pDMA2_X_MODIFY = 4;
 
-  #if 0
+#if 0
   /// map dma4 to sport1 tx
   *pDMA4_PERIPHERAL_MAP = 0x4000;
   // 32-bit transfers, autobuffer, no interrupt
-  //  *pDMA4_CONFIG = WDSIZE_32 | FLOW_1;
   *pDMA4_CONFIG = WDSIZE_32 | FLOW_1;
   //*pDMA4_CONFIG = WDSIZE_32 | FLOW_1 | DI_EN;
   // Start address of data buffer
