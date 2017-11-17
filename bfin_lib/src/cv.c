@@ -53,7 +53,10 @@ void cv_update(u8 ch, fract32 val) {
   
   // extra bit for weird FS timing kludge (need 25 clocks)
   //  cvTxBuf = buf << 1;
-  //  cvTxBuf = buf;
+  cvTxBuf = buf;
+  cvNeedsUpdate = 1;
+    // enable SPORT1 TX
+  *pSPORT1_TCR1 |= TSPEN;
 
   #if 1
   /// ok. try writing directly to SPORT1 FIFO and registers, no DMA
