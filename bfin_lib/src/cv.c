@@ -29,10 +29,19 @@ void init_cv(void) {
   CV_DAC_RESET_HI;
 }
 
+static volatile int cv_update_count = 0;
 
 // update via DMA
 void cv_update(u8 ch, fract32 val) {
   u32 buf;
+
+  if(++cv_update_count == 10000) { 
+
+	LED4_TOGGLE;
+	cv_update_count = 0;
+  }
+
+  
   buf = 0;
   buf |= (CV_DAC_COM_WRITE << CV_DAC_COM_LSHIFT);
 
@@ -43,25 +52,23 @@ void cv_update(u8 ch, fract32 val) {
   buf |= (val >> 15 ) & 0xffff;
   
   // extra bit for weird FS timing kludge (need 25 clocks)
-  // cvTxBuf = buf << 1;
+  //  cvTxBuf = buf << 1;
   //  cvTxBuf = buf;
 
+  #if 1
   /// ok. try writing directly to SPORT1 FIFO and registers, no DMA
-  // disable TX
-  *pSPORT1_TCR1  &= ~TSPEN;
-  //  LED4_HI;
+
+  // disable tx
+  *pSPORT1_TCR1 &= ~TSPEN;
   
   // fill the FIFO (secondary data side)
-  /// primary data (dummy);
-  //  *pSPORT1_TX32 = 0;
-  /// secondary data (the real stuff)
+  /// secondary data
   *pSPORT1_TX32 = buf;
-  *pSPORT1_TX32 = buf;
+  // primary data (dummy)
+  *pSPORT1_TX32 = 0x00000000;
   
   // enable TX
   *pSPORT1_TCR1 |= TSPEN;
 
-  // show me a thing
-  //  LED4_LO;
-  
+ #endif 
 }

@@ -120,7 +120,7 @@ void init_sport1(void) {
   //  *pSPORT1_TCR1 =  TCKFE | ITCLK | ITFS | TFSR | LTFS | LATFS; 
   *pSPORT1_TCR1 =  ITCLK | ITFS | TFSR | LTFS | LATFS;
   
-  // *pSPORT1_TCR1 =  ITCLK | ITFS | TFSR;
+  //*pSPORT1_TCR1 =  ITCLK | ITFS | TFSR;
  
   //// normal mode, not stereo             : TSFSE = 0
   //// secondary side enabled : TXSE  = 1
@@ -128,7 +128,7 @@ void init_sport1(void) {
   *pSPORT1_TCR2 = 23 | TXSE ;
 
   //// 25-bit cause DACs need an extra cycle to recover, ugggh
-  //  *pSPORT1_TCR2 = 24 | TXSE ;
+  //*pSPORT1_TCR2 = 24 | TXSE ;
   
   // tclk = sclk / ( 2 x (div + 1)
   // we want < 25Mhz
@@ -201,11 +201,12 @@ void enable_DMA_sport0(void) {
 
 // begin transfers with sport1 and dma4
 void enable_DMA_sport1(void) {
+  #if 0
   // enable DMA4
-  //// test: don't!
-  //  *pDMA4_CONFIG	= (*pDMA4_CONFIG | DMAEN);
+  *pDMA4_CONFIG	= (*pDMA4_CONFIG | DMAEN);
   // enable sport1 tx
   *pSPORT1_TCR1 	= (*pSPORT1_TCR1 | TSPEN);
+  #endif
 }
 
 
@@ -225,14 +226,32 @@ void init_flags(void) {
 // assign interrupts
 void init_interrupts(void) {
   int i=0;
-  
+
+#if 0 // original
+ 
+  // by default:
+  // sport0 rx (dma1) -> ID2 = IVG9
+  // sport1 tx        -> ID2 = IVG9
+  // spi rx           -> ID3 = IVG10
+
+  // assign ISRs to interrupt vectors:
+  //// ok, this ISR will serve both sports if enabled..
+  *pEVT9 = sport0_rx_isr;
+  *pEVT10 = spi_rx_isr;
+
+  //  *pEVT10 = sport1_tx_isr;
+
+  // unmask in the core event processor
+  asm volatile ("cli %0; bitset(%0, 9); bitset(%0, 10); sti %0; csync;": "+d"(i));
+
+  // unmask peripheral interrupts
+  *pSIC_IMASK = 0x00003200; 
+#else
   // default interrupt assignments:
   // sport0 rx (dma1) -> ID2 = IVG9
   // spi rx           -> ID3 = IVG10
-
   // assign sport1 tx -> ID4 = IVG11
-  *pSIC_IAR1 &= 0xfff0ffff;
-  *pSIC_IAR1 |= 0x00040000;
+  *pSIC_IAR1 = 0x33342221;
   
   // assign ISRs to interrupt vectors:
   *pEVT9 = sport0_rx_isr;
@@ -247,5 +266,8 @@ void init_interrupts(void) {
 				"sti %0; "
 				"csync; " : "+d"(i));
   // unmask peripheral interrupts
-  *pSIC_IMASK = 0x00003200; 
+  *pSIC_IMASK = 0x0000361f;
+  //// BTW: i don't know why we need to unmask IVG12 and IVG13...
+  /// if we leave the flags zeroed nothing ever happens!
+#endif
 }
